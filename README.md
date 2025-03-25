@@ -1,55 +1,54 @@
-# WhoGetsThis? - Genshin Impact & Honkai Star Rail Artefact Analyzer
+# React + TypeScript + Vite
 
-**WhoGetsThis?** is an interactive website that allows players of **Genshin Impact** and **Honkai Star Rail** to determine which characters are best suited to equip a given artefact. The site analyzes the artefact's stats and provides a list of characters ranked by relevance for the equipment.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- **Game Selection**: 
-  - Users can choose between **Genshin Impact** or **Honkai Star Rail** to tailor the artefact analysis for each game. This ensures that the character recommendations are specific to the game you're playing and take into account game-specific mechanics and characters.
-  
-- **Artefact Analysis**: 
-  - Users input key information about their artefact: 
-    - **Set**: Choose the set of the artefact (e.g., Gladiator's Finale, Wanderer's Troupe, etc.).
-    - **Main Stat**: Enter the main stat (e.g., ATK%, DEF%, Crit Rate, etc.) that the artefact boosts.
-    - **Sub-stats**: Add the sub-stats (if applicable) that the artefact includes.
-  - This data allows the site to compute the best-suited characters for the artefact based on their synergies and stat requirements.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- **Character Recommendations**: 
-  - Once the artefact data is entered, the site generates a list of recommended characters who would benefit the most from the selected artefact, based on their roles, elemental affinities, and abilities.
-  - The list is **sorted by relevance**, prioritizing characters who maximize the potential of the artefact. This takes into account various factors such as elemental resonance, playstyle, and synergy with the set bonuses.
+## Expanding the ESLint configuration
 
-- **Genshin Impact-inspired Interface**:
-  - The interface design is inspired by the look and feel of **Genshin Impact**, providing an intuitive and familiar experience for users who are accustomed to the game. The layout is clean and user-friendly, with a focus on making the artefact input process as easy and seamless as possible.
-  - A sleek, responsive design ensures the site works well on both desktop and mobile devices, offering an enjoyable experience for all users.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Technologies Used
-
-- **React**: For building the user interface.
-- **TypeScript**: For adding static types to the project and ensuring better code quality and maintainability.
-
-## Installation
-
-### Prerequisites
-
-- Node.js (version 14 or higher)
-- NPM
-
-### Installation Steps
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/Arcaniyx/WhoGetsThis.git
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-2. Install the dependencies:
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```bash
-npm install
-```
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-3. Run the project
-
-```bash
-npm start
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
 ```
