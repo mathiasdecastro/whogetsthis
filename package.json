@@ -1,1 +1,12 @@
-{}
+{
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  },
+  "name": "mon-projet",
+  "private": true,
+  "homepage": "https://github.com/mathiasdecastro/whogetsthis.git",
+  "scripts": {
+    "build:frontend": "npm run build --prefix frontend",
+    "deploy": "npm run build:frontend && gh-pages -d frontend/build"
+  }
+}
