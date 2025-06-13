@@ -4,7 +4,7 @@
   },
   "name": "mon-projet",
   "private": true,
-  "homepage": "https://github.com/mathiasdecastro/whogetsthis.git",
+  "homepage": "https://mathiasdecastro.github.io/whogetsthis",
   "scripts": {
     "build:frontend": "npm run build --prefix frontend",
     "deploy": "npm run build:frontend && gh-pages -d frontend/build"
